@@ -1,5 +1,7 @@
 import React from 'react';
-import { Divider, List, Button } from 'antd';
+import { Divider, List, Radio } from 'antd';
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
 const Bookshelf = ({ title, books, onChangeBookShelf }) => {
   return (
     <div style={{ padding: '0 140px' }}>
@@ -13,11 +15,15 @@ const Bookshelf = ({ title, books, onChangeBookShelf }) => {
           return (
             <List.Item
               actions={[
-                <Button onClick={() => changeBookShelf('read')}> Read </Button>,
-                <Button onClick={() => changeBookShelf('wantToRead')}>Want to Read</Button>,
-                <Button onClick={() => changeBookShelf('currentlyReading')}>
-                  Currently Reading
-                </Button>
+                <RadioGroup
+                  onChange={e => changeBookShelf(e.target.value)}
+                  defaultValue={item.shelf || 'none'}
+                >
+                  <RadioButton value="none">None</RadioButton>
+                  <RadioButton value="read">Read</RadioButton>
+                  <RadioButton value="wantToRead">Want to Read</RadioButton>
+                  <RadioButton value="currentlyReading">Currently Reading</RadioButton>
+                </RadioGroup>
               ]}
               key={item.id}
               extra={

@@ -41,12 +41,7 @@ class App extends Component {
           exact
           path="/search"
           render={({ history }) => (
-            <SearchBooks
-              onChangeBookShelf={async (book, shelf) => {
-                await this.onChangeBookShelf(book, shelf);
-                history.push('/');
-              }}
-            />
+            <SearchBooks books={this.state.myBooks} onChangeBookShelf={this.onChangeBookShelf} />
           )}
         />
       </div>
