@@ -12,13 +12,22 @@ class SearchBooks extends Component {
   };
 
   search = async query => {
+    if (!query) return this.clearSearch();
     const results = await search(query);
+    if (results.error) return this.clearSearch();
     const resultsMap = results.map(result => {
       const book = this.props.books.find(book => book.id === result.id);
       return Object.assign({}, result, book);
     });
+
     this.setState({
       results: resultsMap
+    });
+  };
+
+  clearSearch = () => {
+    this.setState({
+      results: []
     });
   };
   render() {
